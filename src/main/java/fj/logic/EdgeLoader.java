@@ -5,8 +5,8 @@ import java.util.Set;
 import com.google.common.collect.Sets;
 import fj.model.persistence.SNodePersistence;
 import fj.model.pojos.PsEdge;
-import io.fluo.api.types.TypedLoader;
-import io.fluo.api.types.TypedTransactionBase;
+import org.apache.fluo.recipes.core.types.TypedLoader;
+import org.apache.fluo.recipes.core.types.TypedTransactionBase;
 
 public class EdgeLoader extends TypedLoader {
 

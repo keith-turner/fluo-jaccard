@@ -13,10 +13,10 @@ import com.google.common.hash.HashFunction;
 import com.google.common.hash.Hashing;
 import fj.logic.EdgeLoader;
 import fj.model.pojos.PsEdge;
-import io.fluo.api.client.FluoClient;
-import io.fluo.api.client.FluoFactory;
-import io.fluo.api.client.LoaderExecutor;
-import io.fluo.api.config.FluoConfiguration;
+import org.apache.fluo.api.client.FluoClient;
+import org.apache.fluo.api.client.FluoFactory;
+import org.apache.fluo.api.client.LoaderExecutor;
+import org.apache.fluo.api.config.FluoConfiguration;
 
 public class Load {
 

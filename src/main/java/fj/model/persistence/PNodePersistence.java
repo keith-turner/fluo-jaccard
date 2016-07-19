@@ -14,11 +14,13 @@ import fj.model.pojos.PNodeInfo;
 import fj.model.pojos.PNodeState;
 import fj.model.pojos.PpEdge;
 import fj.model.pojos.SNodeId;
-import fj.util.ColumnIterator;
-import io.fluo.api.client.SnapshotBase;
-import io.fluo.api.data.Bytes;
-import io.fluo.api.data.Column;
-import io.fluo.api.types.TypedTransactionBase;
+import org.apache.fluo.api.client.SnapshotBase;
+import org.apache.fluo.api.client.scanner.CellScanner;
+import org.apache.fluo.api.data.Bytes;
+import org.apache.fluo.api.data.Column;
+import org.apache.fluo.api.data.RowColumnValue;
+import org.apache.fluo.api.data.Span;
+import org.apache.fluo.recipes.core.types.TypedTransactionBase;
 
 public class PNodePersistence {
 
@@ -42,13 +44,12 @@ public class PNodePersistence {
     Set<PNodeId> lowNeighbors = new HashSet<>();
     int degree = 0;
 
-    ColumnIterator colIter = new ColumnIterator(tx, toRow(pnode));
-    while (colIter.hasNext()) {
-      Entry<Column, Bytes> colVal = colIter.next();
-      Column col = colVal.getKey();
-      String fam = colVal.getKey().getFamily().toString();
-      String qual = colVal.getKey().getQualifier().toString();
-      String val = colVal.getValue().toString();
+    CellScanner scanner = tx.scanner().over(Span.exact(toRow(pnode))).build();
+    for (RowColumnValue rcv : scanner) {
+      Column col = rcv.getColumn();
+      String fam = col.getsFamily();
+      String qual = col.getsQualifier();
+      String val = rcv.getsValue();
 
       if (fam.equals(PNodePersistence.HIGH_NEIGHBOR_FAM)) {
         String[] fields = val.toString().split(" ");

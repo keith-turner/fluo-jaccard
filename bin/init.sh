@@ -44,5 +44,5 @@ $FLUO_HOME/bin/fluo exec $APP fj.cmd.CreateExport
 $FLUO_HOME/bin/fluo exec $APP fj.cmd.GenConfig | grep -v "Connecting to" >> $APP_PROPS
 
 $FLUO_HOME/bin/fluo init $APP -f
-$FLUO_HOME/bin/fluo exec $APP io.fluo.recipes.accumulo.cmds.OptimizeTable
+$FLUO_HOME/bin/fluo exec $APP org.apache.fluo.recipes.accumulo.cmds.OptimizeTable
 $FLUO_HOME/bin/fluo start $APP

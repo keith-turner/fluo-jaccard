@@ -4,13 +4,13 @@ import fj.logic.PNodeObserver;
 import fj.logic.SNodeObserver;
 import fj.model.persistence.JaccardKryoFactory;
 import fj.model.pojos.PpEdge;
-import io.fluo.api.config.FluoConfiguration;
-import io.fluo.api.config.ObserverConfiguration;
-import io.fluo.recipes.accumulo.export.AccumuloExport;
-import io.fluo.recipes.accumulo.export.AccumuloExporter;
-import io.fluo.recipes.accumulo.export.TableInfo;
-import io.fluo.recipes.export.ExportQueue;
-import io.fluo.recipes.kryo.KryoSimplerSerializer;
+import org.apache.fluo.api.config.FluoConfiguration;
+import org.apache.fluo.api.config.ObserverConfiguration;
+import org.apache.fluo.recipes.accumulo.export.AccumuloExport;
+import org.apache.fluo.recipes.accumulo.export.AccumuloExporter;
+import org.apache.fluo.recipes.accumulo.export.TableInfo;
+import org.apache.fluo.recipes.core.export.ExportQueue;
+import org.apache.fluo.recipes.kryo.KryoSimplerSerializer;
 
 public class Application {
   public static final String EXPORT_QUEUE_ID = "je";

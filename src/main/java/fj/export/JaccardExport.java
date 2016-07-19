@@ -7,10 +7,10 @@ import java.util.Optional;
 import com.google.common.collect.ImmutableMap;
 import fj.model.pojos.Jaccard;
 import fj.model.pojos.PpEdge;
-import io.fluo.api.data.Bytes;
-import io.fluo.api.data.Column;
-import io.fluo.api.data.RowColumn;
-import io.fluo.recipes.accumulo.export.DifferenceExport;
+import org.apache.fluo.api.data.Bytes;
+import org.apache.fluo.api.data.Column;
+import org.apache.fluo.api.data.RowColumn;
+import org.apache.fluo.recipes.accumulo.export.DifferenceExport;
 import org.apache.accumulo.core.client.lexicoder.DoubleLexicoder;
 import org.apache.accumulo.core.client.lexicoder.ReverseLexicoder;
 

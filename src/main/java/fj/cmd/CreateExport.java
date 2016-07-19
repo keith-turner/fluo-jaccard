@@ -2,7 +2,7 @@ package fj.cmd;
 
 import javax.inject.Inject;
 
-import io.fluo.api.config.FluoConfiguration;
+import org.apache.fluo.api.config.FluoConfiguration;
 import org.apache.accumulo.core.client.ClientConfiguration;
 import org.apache.accumulo.core.client.Connector;
 import org.apache.accumulo.core.client.TableExistsException;

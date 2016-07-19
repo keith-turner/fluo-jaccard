@@ -1,5 +1,5 @@
-Fluo Jaccard Example
---------------------
+Jaccard Example for Apache Fluo
+-------------------------------
 
 Incrementally computes the Jaccard for a bipartite graph.  All of the code
 refers to two node types, a P-node and a S-node.  This example computes the

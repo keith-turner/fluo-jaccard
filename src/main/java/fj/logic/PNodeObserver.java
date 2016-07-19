@@ -4,12 +4,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
-import fj.Application;
 import fj.export.JaccardExport;
 import fj.model.persistence.PNodePersistence;
 import fj.model.pojos.Jaccard;
@@ -17,11 +15,11 @@ import fj.model.pojos.PNodeId;
 import fj.model.pojos.PNodeInfo;
 import fj.model.pojos.PNodeState;
 import fj.model.pojos.PpEdge;
-import io.fluo.api.data.Bytes;
-import io.fluo.api.data.Column;
-import io.fluo.api.types.TypedObserver;
-import io.fluo.api.types.TypedTransactionBase;
-import io.fluo.recipes.export.ExportQueue;
+import org.apache.fluo.api.data.Bytes;
+import org.apache.fluo.api.data.Column;
+import org.apache.fluo.recipes.core.export.ExportQueue;
+import org.apache.fluo.recipes.core.types.TypedObserver;
+import org.apache.fluo.recipes.core.types.TypedTransactionBase;
 
 public class PNodeObserver extends TypedObserver {
 
@@ -35,7 +33,7 @@ public class PNodeObserver extends TypedObserver {
 
   @Override
   public void init(Context context) throws Exception {
-    exportQueue = ExportQueue.getInstance(Application.EXPORT_QUEUE_ID, context.getAppConfiguration());
+    //exportQueue = ExportQueue.getInstance(Application.EXPORT_QUEUE_ID, context.getAppConfiguration());
   }
 
   @Override
@@ -97,6 +95,6 @@ public class PNodeObserver extends TypedObserver {
   }
 
   private void export(TypedTransactionBase tx, PNodeId pnode, PNodeId hPnid, Jaccard currentJaccard, Jaccard newJaccard) {
-    exportQueue.add(tx, new PpEdge(pnode, hPnid), new JaccardExport(Optional.ofNullable(currentJaccard), Optional.of(newJaccard)));
+    //exportQueue.add(tx, new PpEdge(pnode, hPnid), new JaccardExport(Optional.ofNullable(currentJaccard), Optional.of(newJaccard)));
   }
 }

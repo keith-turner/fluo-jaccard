@@ -10,10 +10,12 @@ import fj.model.pojos.PNodeId;
 import fj.model.pojos.PsEdge;
 import fj.model.pojos.SNodeId;
 import fj.model.pojos.SNodeState;
-import fj.util.ColumnIterator;
-import io.fluo.api.data.Bytes;
-import io.fluo.api.data.Column;
-import io.fluo.api.types.TypedTransactionBase;
+import org.apache.fluo.api.client.scanner.CellScanner;
+import org.apache.fluo.api.data.Bytes;
+import org.apache.fluo.api.data.Column;
+import org.apache.fluo.api.data.RowColumnValue;
+import org.apache.fluo.api.data.Span;
+import org.apache.fluo.recipes.core.types.TypedTransactionBase;
 
 public class SNodePersistence {
 
@@ -35,12 +37,11 @@ public class SNodePersistence {
     HashSet<PNodeId> neighbors = new HashSet<>();
     HashSet<PNodeId> newNeighbors = new HashSet<>();
 
-    ColumnIterator colIter = new ColumnIterator(tx, toRow(nodeId));
-
-    while (colIter.hasNext()) {
-      Column col = colIter.next().getKey();
-      String fam = col.getFamily().toString();
-      String qual = col.getQualifier().toString();
+    CellScanner scanner = tx.scanner().over(Span.exact(toRow(nodeId))).build();
+    for (RowColumnValue rcv : scanner) {
+      Column col = rcv.getColumn();
+      String fam = col.getsFamily();
+      String qual = col.getsQualifier();
 
       if (fam.equals(SNodePersistence.EDGE_FAM)) {
         neighbors.add(new PNodeId(qual));

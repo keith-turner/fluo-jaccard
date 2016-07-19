@@ -4,7 +4,7 @@ import java.util.Map.Entry;
 
 import javax.inject.Inject;
 
-import io.fluo.api.config.FluoConfiguration;
+import org.apache.fluo.api.config.FluoConfiguration;
 import org.apache.accumulo.core.client.Connector;
 import org.apache.accumulo.core.client.Scanner;
 import org.apache.accumulo.core.client.lexicoder.DoubleLexicoder;

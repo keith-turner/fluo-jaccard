@@ -3,10 +3,9 @@ package fj.cmd;
 import javax.inject.Inject;
 
 import fj.Application;
-import io.fluo.api.config.FluoConfiguration;
-import io.fluo.recipes.accumulo.export.TableInfo;
 import org.apache.commons.configuration.ConfigurationException;
-import org.apache.commons.configuration.PropertiesConfiguration;
+import org.apache.fluo.api.config.FluoConfiguration;
+import org.apache.fluo.recipes.accumulo.export.TableInfo;
 
 public class GenConfig {
 
@@ -21,9 +20,6 @@ public class GenConfig {
     TableInfo exportTable = new TableInfo(fluoConfig.getAccumuloInstance(), fluoConfig.getAccumuloZookeepers(), fluoConfig.getAccumuloUser(), fluoConfig.getAccumuloPassword(), EXPORT_TABLE_NAME);
     Application.addObserverConfig(newConfig, exportTable);
 
-    PropertiesConfiguration propsConfig = new PropertiesConfiguration();
-    propsConfig.setDelimiterParsingDisabled(true);
-    propsConfig.copy(newConfig);
-    propsConfig.save(System.out);
+    newConfig.save(System.out);
   }
 }

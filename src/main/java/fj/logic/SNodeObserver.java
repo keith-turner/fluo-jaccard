@@ -11,10 +11,10 @@ import fj.model.pojos.PNodeId;
 import fj.model.pojos.PpEdge;
 import fj.model.pojos.SNodeId;
 import fj.model.pojos.SNodeState;
-import io.fluo.api.data.Bytes;
-import io.fluo.api.data.Column;
-import io.fluo.api.types.TypedObserver;
-import io.fluo.api.types.TypedTransactionBase;
+import org.apache.fluo.api.data.Bytes;
+import org.apache.fluo.api.data.Column;
+import org.apache.fluo.recipes.core.types.TypedObserver;
+import org.apache.fluo.recipes.core.types.TypedTransactionBase;
 
 public class SNodeObserver extends TypedObserver {
 
