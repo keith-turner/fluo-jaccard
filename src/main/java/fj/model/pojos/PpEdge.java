@@ -22,7 +22,7 @@ public class PpEdge extends Edge<PNodeId, PNodeId> {
     super(low(pn1, pn2), high(pn1, pn2));
   }
 
-  public PpEdge(){
+  public PpEdge() {
     super();
   }
 }

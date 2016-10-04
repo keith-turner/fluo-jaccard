@@ -30,7 +30,7 @@ public class Query {
 
     for (Entry<Key, Value> entry : scanner) {
       double jaccard = rl.decode(entry.getKey().getColumnFamilyData().toArray());
-      System.out.printf("%.3f %s\n" , jaccard, entry.getKey().getColumnQualifierData());
+      System.out.printf("%.3f %s\n", jaccard, entry.getKey().getColumnQualifierData());
     }
   }
 }

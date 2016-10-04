@@ -63,18 +63,18 @@ public class PNodeInfo {
 
   @Override
   public boolean equals(Object o) {
-    if(o instanceof PNodeInfo) {
-      PNodeInfo opi = (PNodeInfo)o;
-      if(degree != opi.degree || intersection != opi.intersection) {
+    if (o instanceof PNodeInfo) {
+      PNodeInfo opi = (PNodeInfo) o;
+      if (degree != opi.degree || intersection != opi.intersection) {
         return false;
       }
 
-      if(exportedJaccard == null ^ opi.exportedJaccard == null) {
-        //one is null and the other is not
+      if (exportedJaccard == null ^ opi.exportedJaccard == null) {
+        // one is null and the other is not
         return false;
       }
 
-      if(exportedJaccard == null) {
+      if (exportedJaccard == null) {
         return true;
       }
 
@@ -86,6 +86,6 @@ public class PNodeInfo {
 
   @Override
   public String toString() {
-    return intersection+" "+degree+" "+exportedJaccard;
+    return intersection + " " + degree + " " + exportedJaccard;
   }
 }

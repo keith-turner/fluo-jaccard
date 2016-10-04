@@ -16,8 +16,11 @@ public class CreateExport {
 
 
   static Connector getConnector(FluoConfiguration fluoConfig) throws Exception {
-    ZooKeeperInstance zki = new ZooKeeperInstance(new ClientConfiguration().withInstance(fluoConfig.getAccumuloInstance()).withZkHosts(fluoConfig.getAccumuloZookeepers()));
-    Connector conn = zki.getConnector(fluoConfig.getAccumuloUser(), new PasswordToken(fluoConfig.getAccumuloPassword()));
+    ZooKeeperInstance zki = new ZooKeeperInstance(
+        new ClientConfiguration().withInstance(fluoConfig.getAccumuloInstance())
+            .withZkHosts(fluoConfig.getAccumuloZookeepers()));
+    Connector conn = zki.getConnector(fluoConfig.getAccumuloUser(),
+        new PasswordToken(fluoConfig.getAccumuloPassword()));
     return conn;
   }
 
@@ -25,7 +28,7 @@ public class CreateExport {
 
     Connector conn = getConnector(fluoConfig);
 
-    try{
+    try {
       conn.tableOperations().create(GenConfig.EXPORT_TABLE_NAME);
     } catch (TableExistsException tee) {
       conn.tableOperations().delete(GenConfig.EXPORT_TABLE_NAME);

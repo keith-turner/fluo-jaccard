@@ -51,7 +51,7 @@ public class SNodeObserver extends TypedObserver {
         int cmp = newNeighbor.compareTo(neighbor);
         if (cmp < 0) {
           newPairs.add(new PpEdge(newNeighbor, neighbor));
-        } else if(cmp > 0) {
+        } else if (cmp > 0) {
           newPairs.add(new PpEdge(neighbor, newNeighbor));
         }
       }

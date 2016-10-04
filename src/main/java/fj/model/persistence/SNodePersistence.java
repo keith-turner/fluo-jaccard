@@ -88,7 +88,8 @@ public class SNodePersistence {
     HashSet<String> rows = new HashSet<>();
     for (PsEdge psEdge : newEdges) {
       String snodeRow = toRow(psEdge.getNode2());
-      tx.mutate().row(snodeRow).fam(SNodePersistence.NEW_EDGE_FAM).qual(psEdge.getNode1().getId()).set();
+      tx.mutate().row(snodeRow).fam(SNodePersistence.NEW_EDGE_FAM).qual(psEdge.getNode1().getId())
+          .set();
       rows.add(snodeRow);
     }
 

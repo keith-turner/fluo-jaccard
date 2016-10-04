@@ -70,7 +70,8 @@ public class PNodePersistence {
       } else if (fam.equals(SNodePersistence.NEW_EDGE_FAM)) {
         newSNodes.add(new SNodeId(qual));
       } else if (fam.startsWith(PNodePersistence.NEW_INTERSECTION_PREFIX)) {
-        String suffix = fam.substring(PNodePersistence.NEW_INTERSECTION_PREFIX.length(), fam.length());
+        String suffix =
+            fam.substring(PNodePersistence.NEW_INTERSECTION_PREFIX.length(), fam.length());
         List<SNodeId> snodes =
             intersectionUpdates.computeIfAbsent(new PNodeId(qual), k -> new ArrayList<>());
         snodes.add(new SNodeId(suffix));
@@ -86,7 +87,8 @@ public class PNodePersistence {
   public static void queueDegreeUpdates(TypedTransactionBase tx, PNodeId pnode, int degree,
       Set<PNodeId> lowNeighbors) {
     for (PNodeId pnid : lowNeighbors) {
-      tx.mutate().row(toRow(pnid)).fam(PNodePersistence.NEW_DEGREE_FAM).qual(pnode.getId()).set(degree);
+      tx.mutate().row(toRow(pnid)).fam(PNodePersistence.NEW_DEGREE_FAM).qual(pnode.getId())
+          .set(degree);
       tx.mutate().row(toRow(pnid)).col(PNodePersistence.PNODE_NTFY_COL).weaklyNotify();
     }
   }
@@ -100,7 +102,7 @@ public class PNodePersistence {
 
     for (PNodeId pnid : state.getDegreeUpdates().keySet()) {
       // TODO could cause collisions.. could leave and only react to when it differs from known val
-      //tx.mutate().row(row).fam(PNodePersistence.NEW_DEGREE_FAM).qual(pnid.getId()).delete();
+      // tx.mutate().row(row).fam(PNodePersistence.NEW_DEGREE_FAM).qual(pnid.getId()).delete();
     }
 
     for (Entry<PNodeId, List<SNodeId>> entry : state.getIntersectionUpdates().entrySet()) {
@@ -126,7 +128,8 @@ public class PNodePersistence {
         newVal += " " + ej.getIntersection() + " " + ej.getUnion();
       }
 
-      tx.mutate().row(row).fam(PNodePersistence.HIGH_NEIGHBOR_FAM).qual(pNodeId.getId()).set(newVal);
+      tx.mutate().row(row).fam(PNodePersistence.HIGH_NEIGHBOR_FAM).qual(pNodeId.getId())
+          .set(newVal);
     }
   }
 
@@ -166,7 +169,8 @@ public class PNodePersistence {
   }
 
   public static PNodeId fromRow(Bytes row) {
-    return new PNodeId(row.subSequence(PNodePersistence.PNODE_PREFIX.length(), row.length()).toString());
+    return new PNodeId(
+        row.subSequence(PNodePersistence.PNODE_PREFIX.length(), row.length()).toString());
   }
 
   public static String toRow(PNodeId pNodeId) {

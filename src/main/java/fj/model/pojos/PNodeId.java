@@ -4,7 +4,7 @@ public class PNodeId implements Comparable<PNodeId> {
 
   private String id;
 
-  public PNodeId(){}
+  public PNodeId() {}
 
   public PNodeId(String id) {
     this.id = id;
@@ -34,7 +34,7 @@ public class PNodeId implements Comparable<PNodeId> {
     return id;
   }
 
-  public String getId(){
+  public String getId() {
     return id;
   }
 }

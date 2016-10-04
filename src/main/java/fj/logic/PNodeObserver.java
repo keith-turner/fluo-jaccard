@@ -8,9 +8,9 @@ import java.util.Set;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
-import fj.export.JaccardExport;
 import fj.model.persistence.PNodePersistence;
 import fj.model.pojos.Jaccard;
+import fj.model.pojos.JaccardExport;
 import fj.model.pojos.PNodeId;
 import fj.model.pojos.PNodeInfo;
 import fj.model.pojos.PNodeState;
@@ -33,7 +33,8 @@ public class PNodeObserver extends TypedObserver {
 
   @Override
   public void init(Context context) throws Exception {
-    //exportQueue = ExportQueue.getInstance(Application.EXPORT_QUEUE_ID, context.getAppConfiguration());
+    // exportQueue = ExportQueue.getInstance(Application.EXPORT_QUEUE_ID,
+    // context.getAppConfiguration());
   }
 
   @Override
@@ -60,11 +61,12 @@ public class PNodeObserver extends TypedObserver {
       PNodeInfo newInfo = new PNodeInfo(currentInfo);
 
       Integer degreeUpdate = state.getDegreeUpdates().get(hPnid);
-      if(degreeUpdate != null) {
+      if (degreeUpdate != null) {
         newInfo.setDegree(degreeUpdate);
       }
 
-      int intersectionUpdate = state.getIntersectionUpdates().getOrDefault(hPnid, Collections.emptyList()).size();
+      int intersectionUpdate =
+          state.getIntersectionUpdates().getOrDefault(hPnid, Collections.emptyList()).size();
       newInfo.incrementIntersection(intersectionUpdate);
 
       Jaccard currentJaccard = currentInfo.getExportedJaccard();
@@ -85,8 +87,9 @@ public class PNodeObserver extends TypedObserver {
       PNodePersistence.queueDegreeUpdates(tx, pnode, state.getDegree(),
           Sets.union(newLow, state.getLowNeighbors()));
     } else {
-      //TODO comment out to show debugging
-      PNodePersistence.queueDegreeUpdates(tx, pnode, state.getDegree(), Sets.difference(newLow, state.getLowNeighbors()));
+      // TODO comment out to show debugging
+      PNodePersistence.queueDegreeUpdates(tx, pnode, state.getDegree(),
+          Sets.difference(newLow, state.getLowNeighbors()));
     }
 
     PNodePersistence.updateHighNeighbors(tx, pnode, highUpdates);
@@ -94,7 +97,8 @@ public class PNodeObserver extends TypedObserver {
     PNodePersistence.deleteUpdates(tx, pnode, state);
   }
 
-  private void export(TypedTransactionBase tx, PNodeId pnode, PNodeId hPnid, Jaccard currentJaccard, Jaccard newJaccard) {
-    //exportQueue.add(tx, new PpEdge(pnode, hPnid), new JaccardExport(Optional.ofNullable(currentJaccard), Optional.of(newJaccard)));
+  private void export(TypedTransactionBase tx, PNodeId pnode, PNodeId hPnid, Jaccard currentJaccard,
+      Jaccard newJaccard) {
+    // exportQueue.add(tx, new PpEdge(pnode, hPnid), new JaccardExport(currentJaccard, newJaccard));
   }
 }

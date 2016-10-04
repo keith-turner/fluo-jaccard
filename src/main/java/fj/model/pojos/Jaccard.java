@@ -7,7 +7,7 @@ public class Jaccard {
   private int intersection;
   private int union;
 
-  public Jaccard(){}
+  public Jaccard() {}
 
   public Jaccard(int intersection, int degree1, int degree2) {
     Preconditions.checkArgument(intersection >= 0, "negative intersection %s", intersection);
@@ -48,7 +48,7 @@ public class Jaccard {
   }
 
   @Override
-  public String toString(){
-    return intersection+" "+union;
+  public String toString() {
+    return intersection + " " + union;
   }
 }
