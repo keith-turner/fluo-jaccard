@@ -15,7 +15,7 @@ import org.apache.accumulo.core.data.Value;
 import org.apache.accumulo.core.security.Authorizations;
 import org.apache.commons.codec.binary.Hex;
 
-public class Query {
+public class Totals {
 
   static final ReverseLexicoder<Double> rl = new ReverseLexicoder<>(new DoubleLexicoder());
 
@@ -27,12 +27,13 @@ public class Query {
 
     Scanner scanner = conn.createScanner(GenConfig.EXPORT_TABLE_NAME, Authorizations.EMPTY);
 
-    scanner.setRange(new Range("e:" + args[0]));
+    scanner.setRange(Range.prefix("t:"));
 
     for (Entry<Key, Value> entry : scanner) {
-      double jaccard =
-          rl.decode(Hex.decodeHex(entry.getKey().getColumnFamilyData().toString().toCharArray()));
-      System.out.printf("%.3f %s\n", jaccard, entry.getKey().getColumnQualifierData());
+      double jaccard = rl
+          .decode(Hex.decodeHex(entry.getKey().getRowData().toString().substring(2).toCharArray()));
+      System.out.printf("%.3f %s %s\n", jaccard, entry.getKey().getColumnFamilyData(),
+          entry.getKey().getColumnQualifierData());
     }
   }
 }

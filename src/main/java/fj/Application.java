@@ -1,14 +1,15 @@
 package fj;
 
+import fj.export.JaccardExporter;
 import fj.logic.PNodeObserver;
 import fj.logic.SNodeObserver;
 import fj.model.persistence.JaccardKryoFactory;
 import fj.model.pojos.Jaccard;
+import fj.model.pojos.JaccardExport;
 import fj.model.pojos.PpEdge;
 import org.apache.fluo.api.config.FluoConfiguration;
 import org.apache.fluo.api.config.ObserverSpecification;
 import org.apache.fluo.api.config.SimpleConfiguration;
-import org.apache.fluo.recipes.accumulo.export.AccumuloExporter;
 import org.apache.fluo.recipes.core.export.ExportQueue;
 import org.apache.fluo.recipes.kryo.KryoSimplerSerializer;
 
@@ -25,8 +26,8 @@ public class Application {
 
     // setup an export queue
     ExportQueue.configure(fluoConfig,
-        new ExportQueue.Options(EXPORT_QUEUE_ID, AccumuloExporter.class.getName(),
-            PpEdge.class.getName(), Jaccard.class.getName(), NUM_BUCKETS)
+        new ExportQueue.Options(EXPORT_QUEUE_ID, JaccardExporter.class.getName(),
+            PpEdge.class.getName(), JaccardExport.class.getName(), NUM_BUCKETS)
                 .setExporterConfiguration(exporterConf));
 
     KryoSimplerSerializer.setKryoFactory(fluoConfig, JaccardKryoFactory.class);

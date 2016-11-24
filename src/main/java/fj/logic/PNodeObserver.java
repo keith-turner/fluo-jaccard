@@ -8,6 +8,8 @@ import java.util.Set;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
+
+import fj.Application;
 import fj.model.persistence.PNodePersistence;
 import fj.model.pojos.Jaccard;
 import fj.model.pojos.JaccardExport;
@@ -33,8 +35,8 @@ public class PNodeObserver extends TypedObserver {
 
   @Override
   public void init(Context context) throws Exception {
-    // exportQueue = ExportQueue.getInstance(Application.EXPORT_QUEUE_ID,
-    // context.getAppConfiguration());
+    exportQueue =
+        ExportQueue.getInstance(Application.EXPORT_QUEUE_ID, context.getAppConfiguration());
   }
 
   @Override
@@ -99,6 +101,6 @@ public class PNodeObserver extends TypedObserver {
 
   private void export(TypedTransactionBase tx, PNodeId pnode, PNodeId hPnid, Jaccard currentJaccard,
       Jaccard newJaccard) {
-    // exportQueue.add(tx, new PpEdge(pnode, hPnid), new JaccardExport(currentJaccard, newJaccard));
+    exportQueue.add(tx, new PpEdge(pnode, hPnid), new JaccardExport(currentJaccard, newJaccard));
   }
 }

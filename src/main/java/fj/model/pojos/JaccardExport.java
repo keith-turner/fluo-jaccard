@@ -4,6 +4,11 @@ public class JaccardExport {
   private final Double oldVal;
   private final Double newVal;
 
+  public JaccardExport() {
+    oldVal = null;
+    newVal = null;
+  }
+
   public JaccardExport(Jaccard oldVal, Jaccard newVal) {
     if (oldVal != null) {
       this.oldVal = oldVal.toDouble();
